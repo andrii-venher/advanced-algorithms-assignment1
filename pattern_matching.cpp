@@ -20,15 +20,15 @@ int main()
     string test_t = "12341235612123236123";
     string test_p = "123";
 
-    string text = txt_to_string("1984.txt");
-    string small_pattern = "IGNORANCE IS STRENGTH";
-    string large_pattern = "It was a bright cold day in April, and the clocks were striking thirteen.\nWinston Smith, his chin nuzzled into his breast in an effort to escape the\nvile wind, slipped quickly through the glass doors of Victory Mansions,\nthough not quickly enough to prevent a swirl of gritty dust from entering\nalong with him.";
+    string text = txt_to_string("text.txt");
+    string small_pattern = txt_to_string("small_pattern.txt");
+    string large_pattern = txt_to_string("large_pattern.txt");
 
-    vector<string> algs = {"Brute force", "Sunday", "Rabin-Karp"};
+    vector<string> algs = {"Brute-force", "Sunday", "Rabin-Karp"};
 
     for (int i = 0; i < algs.size(); ++i)
     {
-        test_algorithm(algs[i], text, small_pattern);
+        test_algorithm(algs[i], text, large_pattern);
     }
 }
 
@@ -174,7 +174,7 @@ void test_algorithm(string name, string t, string p)
 
     alg_func = brute_force;
 
-    if (name == "Brute Force")
+    if (name == "Brute-Force")
     {
         alg_func = brute_force;
     }
