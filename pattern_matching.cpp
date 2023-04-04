@@ -11,41 +11,25 @@ using namespace std;
 
 void brute_force(string, string);
 void sunday(string, string);
+void test_algorithm(string, string, string);
+void rabin_karp(string, string);
 string txt_to_string(string);
 
 int main()
 {
-    using clock = chrono::steady_clock;
-    using ns = chrono::nanoseconds;
-    int times = 100000;
-    ns total_time_taken = ns(0);
-
     string test_t = "12341235612123236123";
     string test_p = "123";
+
     string text = txt_to_string("1984.txt");
     string small_pattern = "IGNORANCE IS STRENGTH";
     string large_pattern = "It was a bright cold day in April, and the clocks were striking thirteen.\nWinston Smith, his chin nuzzled into his breast in an effort to escape the\nvile wind, slipped quickly through the glass doors of Victory Mansions,\nthough not quickly enough to prevent a swirl of gritty dust from entering\nalong with him.";
-    
-    for (size_t i = 0; i < times; ++i)
+
+    vector<string> algs = {"Brute force", "Sunday", "Rabin-Karp"};
+
+    for (int i = 0; i < algs.size(); ++i)
     {
-        auto start = clock::now();
-        brute_force(text, large_pattern);
-        auto end = clock::now();
-        total_time_taken += chrono::duration_cast<ns>(end - start);
+        test_algorithm(algs[i], text, small_pattern);
     }
-
-    cout << "Brute force: " << total_time_taken.count() / times << "ns\n";
-    total_time_taken = ns(0);
-
-    for (size_t i = 0; i < times; ++i)
-    {
-        auto start = clock::now();
-        sunday(text, large_pattern);
-        auto end = clock::now();
-        total_time_taken += chrono::duration_cast<ns>(end - start);
-    }
-
-    cout << "Sunday: " << total_time_taken.count() / times << "ns\n";
 }
 
 void brute_force(string t, string p)
@@ -123,6 +107,95 @@ void sunday(string t, string p)
             }
         }
     }
+}
+
+void rabin_karp(string t, string p)
+{
+    int t_size = t.size();
+    int p_size = p.size();
+    int p_hash = 0;
+    int t_hash = 0;
+    int coef = 127;
+    int max_coef = 1;
+    int mod = INT_MAX / 2 + 1;
+    bool found;
+
+    for (int i = 0; i < p_size - 1; ++i)
+    {
+        max_coef = (max_coef * coef) % mod;
+    }
+
+    for (int i = 0; i < p_size; ++i)
+    {
+        p_hash = (p_hash * coef + p[i]) % mod;
+        t_hash = (t_hash * coef + t[i]) % mod;
+    }
+
+    for (int i = 0; i <= t_size - p_size; ++i)
+    {
+        if (p_hash == t_hash)
+        {
+            found = true;
+            for (int j = 0; j < p_size; ++j)
+            {
+                if (t[i + j] != p[j])
+                {
+                    found = false;
+                    break;
+                }
+            }
+
+            if (found)
+            {
+                //cout << "Pattern found!\n";
+            }
+        }
+
+        if (i < t_size - p_size)
+        {
+            t_hash = (coef * (t_hash - t[i] * max_coef) + t[i + p_size]) % mod;
+
+            if (t_hash < 0)
+            {
+                t_hash += mod;
+            }
+        }
+    }
+}
+
+void test_algorithm(string name, string t, string p)
+{
+    using clock = chrono::steady_clock;
+    using ns = chrono::nanoseconds;
+    int times = 100000;
+    ns total_time_taken = ns(0);
+
+    void (*alg_func)(string, string);
+
+    alg_func = brute_force;
+
+    if (name == "Brute Force")
+    {
+        alg_func = brute_force;
+    }
+    else if (name == "Sunday")
+    {
+        alg_func = sunday;
+    }
+    else if (name == "Rabin-Karp")
+    {
+        alg_func = rabin_karp;
+    }
+
+    for (size_t i = 0; i < times; ++i)
+    {
+        auto start = clock::now();
+        alg_func(t, p);
+        auto end = clock::now();
+        total_time_taken += chrono::duration_cast<ns>(end - start);
+    }
+
+    cout << name << ": " << total_time_taken.count() / times << "ns\n";
 }
 
 string txt_to_string(string filename)
