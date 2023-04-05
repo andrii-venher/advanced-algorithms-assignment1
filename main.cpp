@@ -21,7 +21,8 @@ int main() {
                     new BruteForcePatternMatchingAlgorithm(),
                     new SundayPatternMatchingAlgorithm(),
                     new RabinKarpPatternMatchingAlgorithm(),
-                    new GusfieldZPatternMatchingAlgorithm()
+                    new GusfieldZPatternMatchingAlgorithm(),
+                    new KMPPatternMatchingAlgorithm()
             };
 
     for(auto algorithm : algorithms)
