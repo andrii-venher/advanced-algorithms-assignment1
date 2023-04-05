@@ -11,7 +11,7 @@ int main() {
     std::string large_pattern = txt_to_string("large_pattern.txt");
 
     const std::string& t = text;
-    const std::string& p = large_pattern;
+    const std::string& p = small_pattern;
 
     std::cout << "T size: " << t.size() << std::endl;
     std::cout << "P size: " << p.size() << std::endl;
@@ -21,6 +21,7 @@ int main() {
                     new BruteForcePatternMatchingAlgorithm(),
                     new SundayPatternMatchingAlgorithm(),
                     new RabinKarpPatternMatchingAlgorithm(),
+                    new GusfieldZPatternMatchingAlgorithm()
             };
 
     for(auto algorithm : algorithms)

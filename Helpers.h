@@ -6,20 +6,23 @@
 #include <fstream>
 #include "PatternMatchingAlgorithms.h"
 
-void test_algorithm(PatternMatchingAlgorithm *algorithm, std::string t, std::string p) {
+void test_algorithm(PatternMatchingAlgorithm *algorithm, const std::string &t, const std::string &p) {
     using clock = std::chrono::steady_clock;
     using ns = std::chrono::nanoseconds;
-    int times = 100;
+    int times = 1000;
     ns total_time_taken = ns(0);
+
+    int matches;
 
     for (size_t i = 0; i < times; ++i) {
         auto start = clock::now();
-        algorithm->findMatches(t, p);
+        matches = algorithm->findMatches(t, p);
         auto end = clock::now();
         total_time_taken += std::chrono::duration_cast<ns>(end - start);
     }
 
-    std::cout << algorithm->getName() << ": " << total_time_taken.count() / times << "ns\n";
+    std::cout << algorithm->getName() << " (matches: " << matches << "): " << total_time_taken.count() / times
+              << "ns\n";
 }
 
 std::string txt_to_string(std::string filename) {
