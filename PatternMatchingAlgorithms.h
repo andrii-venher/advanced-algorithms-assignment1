@@ -1,6 +1,8 @@
 #ifndef ADVANCED_ALGORITHMS_PATTERNMATCHINGALGORITHM_H
 #define ADVANCED_ALGORITHMS_PATTERNMATCHINGALGORITHM_H
 
+#include <string>
+
 class PatternMatchingAlgorithm {
 public:
     virtual void findMatches(std::string t, std::string p) = 0;
