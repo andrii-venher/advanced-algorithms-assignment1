@@ -93,9 +93,9 @@ public:
         int p_size = p.size();
         int p_hash = 0;
         int t_hash = 0;
-        int coef = 127;
+        int coef = 256;
         int max_coef = 1;
-        int mod = INT_MAX / 2 + 1;
+        int mod = INT_MAX;
         bool found;
         int matches = 0;
 
