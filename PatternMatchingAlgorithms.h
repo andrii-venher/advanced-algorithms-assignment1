@@ -133,29 +133,27 @@ public:
         int coef = 256;
         int max_coef = 1;
         int mod = INT_MAX;
-        bool found;
+        int i, j = 0;
         int matches = 0;
 
-        for (int i = 0; i < p_size - 1; ++i) {
+        for (i = 0; i < p_size - 1; ++i) {
             max_coef = (max_coef * coef) % mod;
         }
 
-        for (int i = 0; i < p_size; ++i) {
+        for (i = 0; i < p_size; ++i) {
             p_hash = (p_hash * coef + p[i]) % mod;
             t_hash = (t_hash * coef + t[i]) % mod;
         }
 
-        for (int i = 0; i <= t_size - p_size; ++i) {
+        for (i = 0; i <= t_size - p_size; ++i) {
             if (p_hash == t_hash) {
-                found = true;
-                for (int j = 0; j < p_size; ++j) {
+                for (j = 0; j < p_size; ++j) {
                     if (t[i + j] != p[j]) {
-                        found = false;
                         break;
                     }
                 }
 
-                if (found) {
+                if (j == p_size) {
                     matches++;
                 }
             }
