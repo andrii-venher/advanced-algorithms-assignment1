@@ -10,7 +10,7 @@ int main() {
     std::string second_case_text = txt_to_string("second_case_text.txt");
     std::string small_pattern = txt_to_string("small_pattern.txt");
     std::string large_pattern = txt_to_string("large_pattern.txt");
-    std::string second_case_pattern = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+    std::string second_case_pattern = txt_to_string("second_case_pattern.txt");
 
     const std::string& t = text;
     const std::string& p = small_pattern;
