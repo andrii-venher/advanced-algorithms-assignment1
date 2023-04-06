@@ -41,6 +41,61 @@ public:
     std::string getName() override { return "Brute force"; }
 };
 
+class WildcardBruteForcePatternMatchingAlgorithm : public PatternMatchingAlgorithm {
+public:
+    int findMatches(const std::string &t, const std::string &p) override {
+        size_t t_size = t.size();
+        size_t p_size = p.size();
+        bool found = false;
+
+        bool patternHasStar = false;
+
+        for (int i = 0; i < p_size; ++i) {
+            if (p[i] == '*') {
+                patternHasStar = true;
+                break;
+            }
+        }
+
+        if (patternHasStar) {
+
+        } else {
+            for (size_t i = 0; i <= t_size - p_size; ++i) {
+                found = true;
+
+                int delta = 0;
+                for (size_t j = 0; j < p_size; ++j) {
+                    char current_text_char = t[i + j - delta];
+                    char current_pattern_char = p[j];
+                    bool current_pattern_wildcard = false;
+
+                    if (current_pattern_char == '\\') {
+                        j++;
+                        delta++;
+                        current_pattern_char = p[j];
+                    } else if (current_pattern_char == '?') {
+                        current_pattern_wildcard = true;
+                    }
+
+                    if (current_text_char != current_pattern_char && !current_pattern_wildcard) {
+                        found = false;
+                        break;
+                    }
+                }
+
+                if (found) {
+                    break;
+                }
+            }
+        }
+
+
+        return found ? 1 : 0;
+    }
+
+    std::string getName() override { return "Wildcard brute force"; }
+};
+
 class BinarySundayPatternMatchingAlgorithm : public PatternMatchingAlgorithm {
 public:
     int findMatches(const std::string &t, const std::string &p) override {
