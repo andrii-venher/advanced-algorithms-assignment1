@@ -21,6 +21,7 @@ int main() {
     std::vector<PatternMatchingAlgorithm*> algorithms =
             {
                     new BruteForcePatternMatchingAlgorithm(),
+                    new BinarySundayPatternMatchingAlgorithm(),
                     new SundayPatternMatchingAlgorithm(),
                     new RabinKarpPatternMatchingAlgorithm(),
                     new GusfieldZPatternMatchingAlgorithm(),

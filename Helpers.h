@@ -9,7 +9,7 @@
 void test_algorithm(PatternMatchingAlgorithm *algorithm, const std::string &t, const std::string &p) {
     using clock = std::chrono::steady_clock;
     using ns = std::chrono::nanoseconds;
-    int times = 1000;
+    int times = 100;
     ns total_time_taken = ns(0);
 
     int matches;
