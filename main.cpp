@@ -7,8 +7,10 @@ int main() {
     std::string test_p = "123";
 
     std::string text = txt_to_string("text.txt");
+    std::string second_case_text = txt_to_string("second_case_text.txt");
     std::string small_pattern = txt_to_string("small_pattern.txt");
     std::string large_pattern = txt_to_string("large_pattern.txt");
+    std::string second_case_pattern = "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
 
     const std::string& t = text;
     const std::string& p = small_pattern;
