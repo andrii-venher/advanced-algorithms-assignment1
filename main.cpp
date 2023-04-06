@@ -22,7 +22,8 @@ int main() {
                     new SundayPatternMatchingAlgorithm(),
                     new RabinKarpPatternMatchingAlgorithm(),
                     new GusfieldZPatternMatchingAlgorithm(),
-                    new KMPPatternMatchingAlgorithm()
+                    new KMPPatternMatchingAlgorithm(),
+                    new FSMPatternMatchingAlgorithm()
             };
 
     for(auto algorithm : algorithms)
