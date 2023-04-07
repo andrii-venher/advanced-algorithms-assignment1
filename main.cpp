@@ -20,9 +20,6 @@ int main() {
     const std::string& t = third_case_text;
     const std::string& p = third_case_pattern;
 
-    std::cout << "T size: " << t.size() << std::endl;
-    std::cout << "P size: " << p.size() << std::endl;
-
     std::vector<PatternMatchingAlgorithm*> algorithms =
             {
                     new BruteForcePatternMatchingAlgorithm(),
@@ -34,8 +31,18 @@ int main() {
                     new FSMPatternMatchingAlgorithm()
             };
 
+    std::cout << "T size: " << t.size() << std::endl;
+    std::cout << "P size: " << p.size() << std::endl;
+
     for(auto algorithm : algorithms)
     {
         test_algorithm(algorithm, t, p);
     }
+
+    std::vector<std::string> two_dimensional_test = txt_to_2d_string("two_dimensional_text.txt");
+    int k = 4;
+    std::cout << "N of rows: " << two_dimensional_test.size() << std::endl;
+    std::cout << "K: " << k << std::endl;
+
+    test2DRabinKarp(two_dimensional_test, k);
 }

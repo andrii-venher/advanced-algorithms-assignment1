@@ -28,3 +28,5 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/third_case_text.txt
         ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/third_case_pattern.txt
         ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/two_dimensional_text.txt
+        ${CMAKE_CURRENT_BINARY_DIR} COPYONLY)
