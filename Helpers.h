@@ -66,7 +66,7 @@ void test_algorithm_step(PatternMatchingAlgorithm *algorithm, const std::string 
     large_p_file.close();
 }
 
-void test2DRabinKarp(const std::vector<std::string>& two_dimensional_test, int k)
+void test_2D_RabinKarp(const std::vector<std::string>& two_dimensional_test, int k)
 {
     using clock = std::chrono::steady_clock;
     using ns = std::chrono::nanoseconds;
@@ -84,6 +84,40 @@ void test2DRabinKarp(const std::vector<std::string>& two_dimensional_test, int k
 
     std::cout << "2D Rabin-Karp"<< " (matches: " << matches << "): " << total_time_taken.count() / times / 1000
               << "ms\n";
+}
+
+void test_2D_RabinKarp_step(const std::vector<std::string>& two_dimensional_test, int k)
+{
+    using clock = std::chrono::steady_clock;
+    using ns = std::chrono::nanoseconds;
+    ns total_time_taken;
+    int times = 1000;
+    int step = 10;
+
+    std::ofstream file_out;
+    file_out.open("Rabin-Karp(2D).txt");
+    std::vector<std::string> part_of_t;
+
+    for (int size = step; size <= two_dimensional_test.size(); size+=step)
+    {
+        total_time_taken = ns(0);
+        part_of_t.clear();
+
+        for (int j = 0; j < size; ++j) {
+            part_of_t.push_back(two_dimensional_test[j]);
+        }
+
+        for (size_t i = 0; i < times; ++i) {
+            auto start = clock::now();
+            twoDimensionalRabinKarp(part_of_t, k);
+            auto end = clock::now();
+            total_time_taken += std::chrono::duration_cast<ns>(end - start);
+        }
+
+        file_out << size << ' ' << total_time_taken.count() / times << std::endl;
+    }
+
+    file_out.close();
 }
 
 std::string txt_to_string(std::string filename) {

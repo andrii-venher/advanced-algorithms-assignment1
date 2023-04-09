@@ -35,14 +35,12 @@ int main() {
     for(auto algorithm : algorithms)
     {
         test_algorithm(algorithm, t, p);
-        test_algorithm_step(algorithm, text, p, large_p);
     }
 
     int k = 4;
     std::vector<std::string> two_dimensional_test = txt_to_2d_string("two_dimensional_text.txt");
-
     std::cout << std::endl << "N of rows: " << two_dimensional_test.size() << std::endl;
     std::cout << "K: " << k << std::endl;
 
-    test2DRabinKarp(two_dimensional_test, k);
+    test_2D_RabinKarp(two_dimensional_test, k);
 }
