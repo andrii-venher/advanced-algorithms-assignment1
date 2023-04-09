@@ -3,9 +3,6 @@
 #include "Helpers.h"
 
 int main() {
-    std::string test_t = "12341235612123236123";
-    std::string test_p = "123";
-
     std::string text = txt_to_string("text.txt");
     std::string small_pattern = txt_to_string("small_pattern.txt");
     std::string large_pattern = txt_to_string("large_pattern.txt");
@@ -17,8 +14,9 @@ int main() {
     std::string third_case_text = txt_to_string("third_case_text.txt");
     std::string third_case_pattern = txt_to_string("third_case_pattern.txt");
 
-    const std::string& t = third_case_text;
-    const std::string& p = third_case_pattern;
+    const std::string& t = text;
+    const std::string& p = small_pattern;
+    const std::string& large_p = large_pattern;
 
     std::vector<PatternMatchingAlgorithm*> algorithms =
             {
@@ -37,11 +35,13 @@ int main() {
     for(auto algorithm : algorithms)
     {
         test_algorithm(algorithm, t, p);
+        test_algorithm_step(algorithm, text, p, large_p);
     }
 
-    std::vector<std::string> two_dimensional_test = txt_to_2d_string("two_dimensional_text.txt");
     int k = 4;
-    std::cout << "N of rows: " << two_dimensional_test.size() << std::endl;
+    std::vector<std::string> two_dimensional_test = txt_to_2d_string("two_dimensional_text.txt");
+
+    std::cout << std::endl << "N of rows: " << two_dimensional_test.size() << std::endl;
     std::cout << "K: " << k << std::endl;
 
     test2DRabinKarp(two_dimensional_test, k);

@@ -25,6 +25,47 @@ void test_algorithm(PatternMatchingAlgorithm *algorithm, const std::string &t, c
               << "ms\n";
 }
 
+void test_algorithm_step(PatternMatchingAlgorithm *algorithm, const std::string &t, const std::string &small_p, const std::string &large_p) {
+    using clock = std::chrono::steady_clock;
+    using ns = std::chrono::nanoseconds;
+    ns small_total_time_taken;
+    ns large_total_time_taken;
+    int times = 100;
+    int step = 1000;
+
+    std::ofstream small_p_file;
+    std::ofstream large_p_file;
+    small_p_file.open(algorithm->getName() + "(small_pattern).txt");
+    large_p_file.open(algorithm->getName() + "(large_pattern).txt");
+
+    for (int size = step; size <= t.size(); size += step)
+    {
+        std::string part_of_t = t.substr(0, size);
+        small_total_time_taken = ns(0);
+        large_total_time_taken = ns(0);
+
+        for (size_t time = 0; time < times; ++time) {
+            auto start = clock::now();
+            algorithm->findMatches(part_of_t, small_p);
+            auto end = clock::now();
+            small_total_time_taken += std::chrono::duration_cast<ns>(end - start);
+        }
+
+        for (size_t time = 0; time < times; ++time) {
+            auto start = clock::now();
+            algorithm->findMatches(part_of_t, large_p);
+            auto end = clock::now();
+            large_total_time_taken += std::chrono::duration_cast<ns>(end - start);
+        }
+
+        small_p_file << size << ' ' << small_total_time_taken.count() / times << std::endl;
+        large_p_file << size << ' ' << large_total_time_taken.count() / times << std::endl;
+    }
+
+    small_p_file.close();
+    large_p_file.close();
+}
+
 void test2DRabinKarp(const std::vector<std::string>& two_dimensional_test, int k)
 {
     using clock = std::chrono::steady_clock;
