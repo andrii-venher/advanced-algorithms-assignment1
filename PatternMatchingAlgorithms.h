@@ -279,9 +279,9 @@ private:
 public:
     int findMatches(const std::string &t, const std::string &p) override {
         std::string tp = p + "$" + t;
-        int l = tp.length();
+        const int l = tp.length();
 
-        int *Z = new int[l];
+        int Z[l];
         build_z_array(tp, Z);
 
         int matches = 0;
@@ -291,7 +291,7 @@ public:
                 matches++;
             }
         }
-        delete[]Z;
+
         return matches;
     }
 
