@@ -1,0 +1,15 @@
+sometext
+ext
+1
+
+abcdefg123
+c*2?
+1
+
+abcd
+a*dd
+0
+
+abc\asda?*pp
+\\***?
+1

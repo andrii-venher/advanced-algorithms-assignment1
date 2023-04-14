@@ -1,46 +1,27 @@
 #include <vector>
-#include "PatternMatchingAlgorithms.h"
-#include "Helpers.h"
+#include "TestRunner.h"
 
 int main() {
-    std::string text = txt_to_string("text.txt");
-    std::string small_pattern = txt_to_string("small_pattern.txt");
-    std::string large_pattern = txt_to_string("large_pattern.txt");
+    TestRunner test_runner;
 
-    std::string first_case_text = txt_to_string("first_case_text.txt");
-    std::string first_case_pattern = txt_to_string("first_case_pattern.txt");
-    std::string second_case_text = txt_to_string("second_case_text.txt");
-    std::string second_case_pattern = txt_to_string("second_case_pattern.txt");
-    std::string third_case_text = txt_to_string("third_case_text.txt");
-    std::string third_case_pattern = txt_to_string("third_case_pattern.txt");
+//    std::vector<PatternMatchingAlgorithm *> algorithms = {
+//            new BruteForcePatternMatchingAlgorithm(),
+//            new BinarySundayPatternMatchingAlgorithm(),
+//            new SundayPatternMatchingAlgorithm(),
+//            new RabinKarpPatternMatchingAlgorithm(),
+//            new GusfieldZPatternMatchingAlgorithm(),
+//            new KMPPatternMatchingAlgorithm(),
+//            new FSMPatternMatchingAlgorithm(),
+//    };
+//
+//    test_runner.test_algorithms(algorithms, test_runner.text, test_runner.large_pattern);
 
-    const std::string& t = text;
-    const std::string& p = small_pattern;
-    const std::string& large_p = large_pattern;
-
-    std::vector<PatternMatchingAlgorithm*> algorithms =
+    std::vector<WildcardPatternMatchingAlgorithm *> wildcard_algorithms =
             {
-                    new BruteForcePatternMatchingAlgorithm(),
-                    new BinarySundayPatternMatchingAlgorithm(),
-                    new SundayPatternMatchingAlgorithm(),
-                    new RabinKarpPatternMatchingAlgorithm(),
-                    new GusfieldZPatternMatchingAlgorithm(),
-                    new KMPPatternMatchingAlgorithm(),
-                    new FSMPatternMatchingAlgorithm()
+                    new WildcardBruteForcePatternMatchingAlgorithm()
             };
 
-    std::cout << "T size: " << t.size() << std::endl;
-    std::cout << "P size: " << p.size() << std::endl;
+    test_runner.test_wildcards_algorithms_using_test_cases(wildcard_algorithms);
 
-    for(auto algorithm : algorithms)
-    {
-        test_algorithm(algorithm, t, p);
-    }
-
-    int k = 4;
-    std::vector<std::string> two_dimensional_test = txt_to_2d_string("two_dimensional_text.txt");
-    std::cout << std::endl << "N of rows: " << two_dimensional_test.size() << std::endl;
-    std::cout << "K: " << k << std::endl;
-
-    test_2D_RabinKarp(two_dimensional_test, k);
+//    test_runner.test_2d_rabin_karp(4);
 }
