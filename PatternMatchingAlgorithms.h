@@ -163,7 +163,7 @@ public:
 
         int index_of_first_star = -1;
         for (int i = 0; i < p_size; ++i) {
-            if (p[i] == '*' && (i == 0 || (i > 0 && p[i - 1] != '\\'))) {
+            if (p[i] == '*' && (i == 0 || (i > 0 && p[i - 1] != '\\') || (i > 1 && p[i - 1] == '\\' && p[i - 2] == '\\'))) {
                 index_of_first_star = i;
                 break;
             }
@@ -176,6 +176,9 @@ public:
             }
             text_cursor = initial_match.end_index;
             pattern_cursor = index_of_first_star;
+        }
+        else {
+            return find_match_without_star(t, p).found;
         }
 
         while (pattern_cursor < p_size) {
