@@ -23,4 +23,11 @@ int main() {
             };
 
     test_runner.test_wildcards_algorithms_using_test_cases(wildcard_algorithms);
+
+    int k = 4;
+    std::vector<std::string> two_dimensional_test = txt_to_2d_string("two_dimensional_text.txt");
+    std::cout << std::endl << "N of rows: " << two_dimensional_test.size() << std::endl;
+    std::cout << "K: " << k << std::endl;
+
+    test_2D_RabinKarp(two_dimensional_test, k);
 }
