@@ -18,7 +18,7 @@ int main() {
 
     std::vector<WildcardPatternMatchingAlgorithm *> wildcard_algorithms =
             {
-                    new WildcardBruteForcePatternMatchingAlgorithm()
+                    new WildcardBruteForcePatternMatchingAlgorithm(),
             };
 
     test_runner.test_wildcards_algorithms_using_test_cases(wildcard_algorithms);

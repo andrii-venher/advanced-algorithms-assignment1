@@ -28,7 +28,7 @@ private:
 
     static void test_wildcard_algorithm(WildcardPatternMatchingAlgorithm *algorithm, const std::string &t, const std::string &p);
 
-    static void test_wildcard_algorithm_using_test_case(WildcardPatternMatchingAlgorithm *algorithm, const TestCase &test_case);
+    static bool test_wildcard_algorithm_using_test_case(WildcardPatternMatchingAlgorithm *algorithm, const TestCase &test_case);
 
     void load_wildcard_test_cases();
 

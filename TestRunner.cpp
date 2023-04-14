@@ -52,7 +52,7 @@ void TestRunner::test_wildcard_algorithm(WildcardPatternMatchingAlgorithm *algor
     std::cout << algorithm->get_name() << " (match is " << (match ? "found" : "not found") << ")." << std::endl;
 }
 
-void TestRunner::test_wildcard_algorithm_using_test_case(WildcardPatternMatchingAlgorithm *algorithm,
+bool TestRunner::test_wildcard_algorithm_using_test_case(WildcardPatternMatchingAlgorithm *algorithm,
                                                          const TestCase &test_case) {
     bool match;
 
@@ -64,11 +64,15 @@ void TestRunner::test_wildcard_algorithm_using_test_case(WildcardPatternMatching
         match = algorithm->find_match(test_case.t, test_case.p);
     } catch (const std::logic_error &ex) {
         std::cout << algorithm->get_name() << " has thrown an exception: " << ex.what() << std::endl;
-        return;
+        return false;
     }
 
+    bool assert = match == test_case.expected;
+
     std::cout << algorithm->get_name() << " (match is " << (match ? "found" : "not found") << ") -> "
-              << (match == test_case.expected ? "pass" : "fail") << "." << std::endl;
+              << (assert ? "pass" : "fail") << "." << std::endl;
+
+    return assert;
 }
 
 void TestRunner::load_wildcard_test_cases() {
@@ -125,12 +129,17 @@ void TestRunner::test_wildcards_algorithms_using_test_cases(
         const std::vector<WildcardPatternMatchingAlgorithm *> &algorithms) {
     std::cout << "************* " << "Wildcard pattern matching algorithms" << " *************" << std::endl;
     for (auto algorithm: algorithms) {
-        std::cout << "------------- " << algorithm->get_name() << " -------------" << std::endl;
+        std::cout << std::endl << "------------- " << algorithm->get_name() << " -------------" << std::endl;
+        int passed = 0;
         for (const auto &test_case: test_cases) {
-            test_wildcard_algorithm_using_test_case(algorithm, test_case);
+            bool pass = test_wildcard_algorithm_using_test_case(algorithm, test_case);
+            if (pass) {
+                passed++;
+            }
         }
-        std::cout << std::endl;
+        std::cout << std::endl << "Passed: " << passed << " out of " << test_cases.size() << std::endl;
     }
+    std::cout << std::endl;
 }
 
 void TestRunner::test_algorithm_step(PatternMatchingAlgorithm *algorithm, const std::string &t, const std::string &small_p, const std::string &large_p) {
