@@ -10,6 +10,8 @@
 
 class TestRunner {
 private:
+    std::vector<std::string> two_dimensional_test;
+
     struct TestCase {
         std::string t;
         std::string p;
@@ -19,6 +21,8 @@ private:
     };
 
     std::string txt_to_string(const std::string &filename);
+
+    std::vector<std::string> txt_to_2d_string(std::string filename);
 
     static void test_algorithm(PatternMatchingAlgorithm *algorithm, const std::string &t, const std::string &p, int times);
 
@@ -47,6 +51,12 @@ public:
                                    const std::string &p);
 
     void test_wildcards_algorithms_using_test_cases(const std::vector<WildcardPatternMatchingAlgorithm *> &algorithms);
+
+    void test_2d_rabin_karp(int k);
+
+    void test_2d_rabin_karp_step(int k);
+
+    void test_algorithm_step(PatternMatchingAlgorithm *algorithm, const std::string &t, const std::string &small_p, const std::string &large_p);
 };
 
 
