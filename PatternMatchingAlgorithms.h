@@ -153,7 +153,10 @@ public:
                 }
                 i = j - 1;
             }
-            new_p << p[i];
+            if (p[i] != '*' || (i != 0 && i != p.size()-1) || p[i-1] == '\\')
+            {
+                new_p << p[i];
+            }
         }
         p = new_p.str();
         p_size = p.size();
