@@ -153,13 +153,23 @@ public:
                 }
                 i = j - 1;
             }
-            if (p[i] != '*' || (i != 0 && i != p.size()-1) || p[i-1] == '\\')
-            {
-                new_p << p[i];
-            }
+            new_p << p[i];
         }
         p = new_p.str();
+        // Trim star from start
+        if (p[0] == '*') {
+            p = p.substr(1);
+        }
+        // Trim star from end if not escaped
+        if (p.size() > 1 && p[p.size() - 1] == '*' && p[p.size() - 2] != '\\') {
+            p = p.substr(0, p.size() - 1);
+        }
         p_size = p.size();
+
+        // If pattern is empty, then trivial
+        if (p_size == 0) {
+            return true;
+        }
 
         int text_cursor = 0;
         int pattern_cursor = 0;
