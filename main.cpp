@@ -12,7 +12,9 @@ void test_algorithms(TestRunner &test_runner) {
     algorithms.emplace_back(new RabinKarpPatternMatchingAlgorithm());
     algorithms.emplace_back(new GusfieldZPatternMatchingAlgorithm());
 
-    test_runner.test_algorithms(algorithms, test_runner.text, test_runner.small_pattern);
+    int times = 10;
+
+    test_runner.test_algorithms(algorithms, test_runner.text, test_runner.small_pattern, times);
 }
 
 void test_wildcard_algorithms(TestRunner &test_runner) {

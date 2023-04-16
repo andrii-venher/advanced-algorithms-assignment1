@@ -1,10 +1,6 @@
 #ifndef ADVANCED_ALGORITHMS_TESTRUNNER_H
 #define ADVANCED_ALGORITHMS_TESTRUNNER_H
 
-#include <iostream>
-#include <chrono>
-#include <fstream>
-#include <utility>
 #include <vector>
 #include "algorithms/PatternMatchingAlgorithm.h"
 #include "algorithms/WildcardPatternMatchingAlgorithm.h"
@@ -45,18 +41,11 @@ public:
     TestRunner();
 
     void test_algorithms(const std::vector<std::unique_ptr<PatternMatchingAlgorithm>> &algorithms, const std::string &t,
-                         const std::string &p, int times = 10);
-
-    void test_wildcards_algorithms(const std::vector<std::unique_ptr<WildcardPatternMatchingAlgorithm>> &algorithms, const std::string &t,
-                                   const std::string &p);
+                         const std::string &p, int times);
 
     void test_wildcards_algorithms_using_test_cases(const std::vector<std::unique_ptr<WildcardPatternMatchingAlgorithm>> &algorithms);
 
     void test_2d_rabin_karp(int k);
-
-    void test_2d_rabin_karp_step(int k);
-
-    void test_algorithm_step(PatternMatchingAlgorithm *algorithm, const std::string &t, const std::string &small_p, const std::string &large_p);
 };
 
 
