@@ -1,8 +1,5 @@
-//
-// Created by Andrii Venher on 14/04/2023.
-//
-
 #include "TestRunner.h"
+#include "algorithms/TwoDimensionalRabinKarpPatternMatchingAlgorithm.h"
 
 std::string TestRunner::txt_to_string(const std::string &filename) {
     std::string tmp;
@@ -108,31 +105,31 @@ TestRunner::TestRunner() {
     load_static_assets();
 }
 
-void TestRunner::test_algorithms(const std::vector<PatternMatchingAlgorithm *> &algorithms, const std::string &t,
+void TestRunner::test_algorithms(const std::vector<std::unique_ptr<PatternMatchingAlgorithm>> &algorithms, const std::string &t,
                                  const std::string &p, int times) {
-    std::cout << "************* " << "Pattern matching algorithms" << " *************" << std::endl;
-    for (auto algorithm: algorithms) {
-        test_algorithm(algorithm, t, p, times);
+    std::cout << "************* " << "Pattern matching algorithms" << " *************" << std::endl << std::endl;
+    for (const auto& algorithm: algorithms) {
+        test_algorithm(algorithm.get(), t, p, times);
     }
     std::cout << std::endl;
 }
 
-void TestRunner::test_wildcards_algorithms(const std::vector<WildcardPatternMatchingAlgorithm *> &algorithms,
+void TestRunner::test_wildcards_algorithms(const std::vector<std::unique_ptr<WildcardPatternMatchingAlgorithm>> &algorithms,
                                            const std::string &t,
                                            const std::string &p) {
-    for (auto algorithm: algorithms) {
-        test_wildcard_algorithm(algorithm, t, p);
+    for (const auto& algorithm: algorithms) {
+        test_wildcard_algorithm(algorithm.get(), t, p);
     }
 }
 
 void TestRunner::test_wildcards_algorithms_using_test_cases(
-        const std::vector<WildcardPatternMatchingAlgorithm *> &algorithms) {
+        const std::vector<std::unique_ptr<WildcardPatternMatchingAlgorithm>> &algorithms) {
     std::cout << "************* " << "Wildcard pattern matching algorithms" << " *************" << std::endl;
-    for (auto algorithm: algorithms) {
+    for (const auto& algorithm: algorithms) {
         std::cout << std::endl << "------------- " << algorithm->get_name() << " -------------" << std::endl;
         int passed = 0;
         for (const auto &test_case: test_cases) {
-            bool pass = test_wildcard_algorithm_using_test_case(algorithm, test_case);
+            bool pass = test_wildcard_algorithm_using_test_case(algorithm.get(), test_case);
             if (pass) {
                 passed++;
             }
@@ -183,7 +180,7 @@ void TestRunner::test_algorithm_step(PatternMatchingAlgorithm *algorithm, const 
 }
 
 void TestRunner::test_2d_rabin_karp(int k) {
-    std::cout << "************* " << TwoDimensionalRabinKarpPatternMatchingAlgorithm::get_name() << " *************" << std::endl;
+    std::cout << "************* " << TwoDimensionalRabinKarpPatternMatchingAlgorithm::get_name() << " *************" << std::endl << std::endl;
     std::cout << "N of rows: " << two_dimensional_test.size() << std::endl;
     std::cout << "K: " << k << std::endl;
 

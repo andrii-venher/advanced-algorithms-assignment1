@@ -6,10 +6,10 @@
 #include <fstream>
 #include <utility>
 #include <vector>
-#include "PatternMatchingAlgorithms.h"
+#include "algorithms/PatternMatchingAlgorithm.h"
+#include "algorithms/WildcardPatternMatchingAlgorithm.h"
 
 class TestRunner {
-private:
     std::vector<std::string> two_dimensional_test;
 
     struct TestCase {
@@ -44,13 +44,13 @@ public:
 
     TestRunner();
 
-    void test_algorithms(const std::vector<PatternMatchingAlgorithm *> &algorithms, const std::string &t,
+    void test_algorithms(const std::vector<std::unique_ptr<PatternMatchingAlgorithm>> &algorithms, const std::string &t,
                          const std::string &p, int times = 10);
 
-    void test_wildcards_algorithms(const std::vector<WildcardPatternMatchingAlgorithm *> &algorithms, const std::string &t,
+    void test_wildcards_algorithms(const std::vector<std::unique_ptr<WildcardPatternMatchingAlgorithm>> &algorithms, const std::string &t,
                                    const std::string &p);
 
-    void test_wildcards_algorithms_using_test_cases(const std::vector<WildcardPatternMatchingAlgorithm *> &algorithms);
+    void test_wildcards_algorithms_using_test_cases(const std::vector<std::unique_ptr<WildcardPatternMatchingAlgorithm>> &algorithms);
 
     void test_2d_rabin_karp(int k);
 
