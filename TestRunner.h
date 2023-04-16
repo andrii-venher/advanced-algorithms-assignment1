@@ -2,6 +2,7 @@
 #define ADVANCED_ALGORITHMS_TESTRUNNER_H
 
 #include <vector>
+#include <memory>
 #include "algorithms/PatternMatchingAlgorithm.h"
 #include "algorithms/WildcardPatternMatchingAlgorithm.h"
 

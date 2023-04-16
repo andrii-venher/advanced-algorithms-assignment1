@@ -1,4 +1,5 @@
 #include <vector>
+#include <memory>
 #include "TestRunner.h"
 
 void test_algorithms(TestRunner &test_runner) {
